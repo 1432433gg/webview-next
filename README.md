@@ -29,6 +29,6 @@ Compose 示例通过容器内部健康检查验证启动。与 Reader 共用 Com
 
 ## 致谢
 
-- [hectorqin/remote-webview](https://hub.docker.com/r/hectorqin/remote-webview)（接口参考 [Reader Pro 调用端](https://github.com/warpdotsys/reader-pro/blob/v3.2.14/recovered-source/jadx/sources/com/htmake/reader/utils/RemoteWebview.java#L86)）
+- [hectorqin/remote-webview](https://hub.docker.com/r/hectorqin/remote-webview)
 - [microsoft/playwright](https://github.com/microsoft/playwright)
 - [chromium/chromium](https://github.com/chromium/chromium)
