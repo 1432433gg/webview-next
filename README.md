@@ -35,6 +35,9 @@ Compose 示例通过容器内部健康检查验证启动。与 Reader 共用 Com
 
 ## 致谢
 
-- [Maple0517/reader-next](https://github.com/Maple0517/reader-next)
-- [givenge/reader-rust](https://github.com/givenge/reader-rust)
-- [hectorqin/reader](https://github.com/hectorqin/reader)
+- [hectorqin/remote-webview](https://hub.docker.com/r/hectorqin/remote-webview)
+- [warpdotsys/reader-pro](https://github.com/warpdotsys/reader-pro)
+- [microsoft/playwright](https://github.com/microsoft/playwright)
+- [chromium/chromium](https://github.com/chromium/chromium)
+- [nodejs/node](https://github.com/nodejs/node)
+- [microsoft/TypeScript](https://github.com/microsoft/TypeScript)
