@@ -32,3 +32,9 @@ Compose 示例通过容器内部健康检查验证启动。与 Reader 共用 Com
 `/render.html` 接口参考 [hectorqin/remote-webview](https://hub.docker.com/r/hectorqin/remote-webview) 的机制及其 [Reader Pro 调用端](https://github.com/warpdotsys/reader-pro/blob/v3.2.14/recovered-source/jadx/sources/com/htmake/reader/utils/RemoteWebview.java)。服务及适配代码独立编写。使用 [Playwright](https://github.com/microsoft/playwright/blob/main/LICENSE)（Apache-2.0）及其管理的 Chromium，第三方组件保留各自许可和声明。
 
 容器使用 [Playwright v1.65.1 沙盒配置](https://github.com/microsoft/playwright/blob/v1.65.1/utils/docker/seccomp_profile.json)，按 Apache-2.0 保留上游文件和许可。
+
+## 致谢
+
+- [Maple0517/reader-next](https://github.com/Maple0517/reader-next)
+- [givenge/reader-rust](https://github.com/givenge/reader-rust)
+- [hectorqin/reader](https://github.com/hectorqin/reader)
