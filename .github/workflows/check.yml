@@ -1,0 +1,46 @@
+name: Check WebView
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            arch: amd64
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Allow Chromium user namespaces on the ephemeral runner
+        run: |
+          if test -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
+      - run: sh scripts/check.sh
+        env:
+          DEBUG: pw:browser
+      - run: docker compose -f docker/compose.yml config
+      - run: docker compose -f docker/compose.yml up --build -d --wait
+      - run: docker compose -f docker/compose.yml exec -T webview node --input-type=module - < tests/container-smoke.mjs
+      - if: failure()
+        run: docker compose -f docker/compose.yml logs webview
+      - if: always()
+        run: docker compose -f docker/compose.yml down
+      - uses: docker/setup-buildx-action@v3
+      - name: Record compressed OCI layer size
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          docker buildx build --platform "linux/$ARCH" --provenance=false --output type=oci,dest="$RUNNER_TEMP/webview.tar" .
+          mkdir "$RUNNER_TEMP/webview-oci"
+          tar -xf "$RUNNER_TEMP/webview.tar" -C "$RUNNER_TEMP/webview-oci"
+          node scripts/image-size.mjs "$RUNNER_TEMP/webview-oci" "$ARCH" | tee -a "$GITHUB_STEP_SUMMARY"
